@@ -12,8 +12,9 @@ public class Program
 
         container.Register(Component.For<ICache>().ImplementedBy<Cache>().LifestyleSingleton());
         container.Register(Component.For<IStorage>().ImplementedBy<Pantry>().LifestyleSingleton());
-
-        container.Register(Component.For<IChef>().ImplementedBy<Chef>().LifestyleSingleton());
+        container.Register(Component.For<IStorage>().ImplementedBy<Table>().LifestyleSingleton());
+        container.Register(Component.For<IChef>()
+                        .ImplementedBy<Chef>().DependsOn(Dependency.OnComponent(typeof(IStorage), typeof(Table))));
 
         var service = container.Resolve<IChef>();
 
