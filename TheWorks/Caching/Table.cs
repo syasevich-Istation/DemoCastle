@@ -1,5 +1,10 @@
 ﻿namespace TheWorks.Caching
 {
+    /// <summary>
+    /// Table is a proxy for pantry
+    /// it conforms to the same IStorage interface
+    /// and proxies request to pantry only when it is incapable to resolve them itself
+    /// </summary>
     public class Table : IStorage
     {
         private readonly ICache _cache;
@@ -18,7 +23,8 @@
 
         public IJar GetAJur(string name)
         {
-            if (!_cache.TryGet(name, out int count) || count == 0)
+            // we do not care what it returns, we just need to know if the jar is on the table
+            if (!_cache.TryGet(name, out _))
             {
                 var jar = _pantry.GetAJur(name);
                 _cache.Put(name);
@@ -29,7 +35,8 @@
 
         public BreadLoaf GetBread(string name)
         {
-            if (!_cache.TryGet(name, out int count) || count == 0)
+            // we do not care what it returns, we just need to know if the bread loaf is on the table
+            if (!_cache.TryGet(name, out string _))
             {
                 // not in cache (not on the table) - get from pantry
                 var loaf = _pantry.GetBread(name);

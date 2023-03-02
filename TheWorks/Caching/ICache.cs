@@ -6,7 +6,7 @@ namespace TheWorks.Caching
 {
     public interface ICache
     {
-        bool TryGet(string key, out int count);
+        bool TryGet(string key, out string name);
         void Put(string key);
         void Cleanup();
     }

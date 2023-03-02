@@ -1,37 +1,43 @@
 ﻿
 using System;
 using System.Collections.Concurrent;
-
+using System.Collections.Generic;
 
 namespace TheWorks.Caching
 {
+    /// <summary>
+    /// Supper dummy implementation of cache
+    /// Since everything is synchronous we do not need
+    /// to worry about concurrency
+    /// and we do store real data, just an indication that the item in on the table.
+    /// </summary>
     public class Cache : ICache
     {
-        // cunt of any stuff from storage that we keep on the table
-        public ConcurrentDictionary<string, int> _dataCache = new ConcurrentDictionary<string, int>();
+        // just a collection on food items in the table
+        public HashSet<string> _itemsOnTheTable = new HashSet<string>();
 
-        public bool TryGet(string key, out int count)
+        public bool TryGet(string key, out string name)
         {
-            if (_dataCache.TryGetValue(key, out var countFromCache))
+            if (_itemsOnTheTable.TryGetValue(key, out var actualName))
             {
                 Console.WriteLine($"           Cache hit for {key}");
-                count = countFromCache;
+                name = actualName;
                 return true;
             }
             Console.WriteLine($"           Cache miss for {key}");
-            count = 0;
+            name = "";
             return false;
         }
 
         public void Put(string key)
         {
-            if (_dataCache.TryAdd(key, 1))
+            if (_itemsOnTheTable.Add(key))
                 Console.WriteLine($"           Added to cache {key}");
         }
 
         public void Cleanup()
         {
-            _dataCache.Clear();
+            _itemsOnTheTable.Clear();
         }
     }
 }
