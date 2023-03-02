@@ -3,21 +3,25 @@ using Castle.Windsor;
 using TheWorks;
 using TheWorks.Caching;
 
-public class Program
+namespace HigherTower
 {
-    static void Main(string[] args)
+    public class Program
     {
-        //Initialize a new container
-        WindsorContainer container = new WindsorContainer();
+        static void Main(string[] args)
+        {
+            //Initialize a new container
+            WindsorContainer container = new WindsorContainer();
 
-        container.Register(Component.For<ICache>().ImplementedBy<Cache>());
-        container.Register(Component.For<IStorage>().ImplementedBy<Pantry>());
-        container.Register(Component.For<IStorage>().ImplementedBy<Table>());
-        container.Register(Component.For<IChef>()
-                        .ImplementedBy<Chef>().DependsOn(Dependency.OnComponent(typeof(IStorage), typeof(Table))));
+            container.Register(Component.For<PerformanceLoggingInterceptor>().LifestyleTransient());
+            container.Register(Component.For<ICache>().ImplementedBy<Cache>().LifestyleSingleton());
+            container.Register(Component.For<IStorage>().ImplementedBy<Pantry>().LifestyleSingleton());
+            container.Register(Component.For<IStorage>().ImplementedBy<Table>().LifestyleSingleton().Interceptors<PerformanceLoggingInterceptor>());
+            container.Register(Component.For<IChef>()
+                            .ImplementedBy<Chef>().DependsOn(Dependency.OnComponent(typeof(IStorage), typeof(Table))));
 
-        var service = container.Resolve<IChef>();
+            var service = container.Resolve<IChef>();
 
-        service?.MakeSandwiches();
+            service?.MakeSandwiches();
+        }
     }
 }

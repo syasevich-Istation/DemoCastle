@@ -10,10 +10,10 @@ public class Program
         //Initialize a new container
         WindsorContainer container = new WindsorContainer();
 
-        container.Register(Component.For<ICache>().ImplementedBy<Cache>());
-        container.Register(Component.For<IStorage>().ImplementedBy<Pantry>());
+        container.Register(Component.For<ICache>().ImplementedBy<Cache>().LifestyleSingleton());
+        container.Register(Component.For<IStorage>().ImplementedBy<Pantry>().LifestyleSingleton());
 
-        container.Register(Component.For<IChef>().ImplementedBy<Chef>());
+        container.Register(Component.For<IChef>().ImplementedBy<Chef>().LifestyleSingleton());
 
         var service = container.Resolve<IChef>();
 
