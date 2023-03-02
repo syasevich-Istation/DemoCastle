@@ -32,7 +32,7 @@ namespace HigherTower
             {
                 timer.Stop();
                 var result = isFailed ? "failed" : "succeeded";
-                Console.WriteLine($"----PERFORMACE: Calle to {invocation.Method.Name} {result} in {timer.ElapsedMilliseconds} ms");
+                Console.WriteLine($"----PERFORMACE: Call to {invocation.Method.Name} {result} in {timer.ElapsedMilliseconds} ms");
             }
         }
     }
