@@ -10,7 +10,6 @@ public class Program
         var serviceCollection = new ServiceCollection();
 
         var serviceProvider = serviceCollection
-            .AddSingleton<ICache, Cache>()
             .AddSingleton<IStorage, Pantry>()
             .AddSingleton<IChef, Chef>()
             .BuildServiceProvider();
@@ -23,7 +22,5 @@ public class Program
 
         Console.Write("Press <Entr> to exist");
         Console.ReadLine();
-
-
     }
 }
