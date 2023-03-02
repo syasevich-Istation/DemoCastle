@@ -20,7 +20,7 @@ namespace TheWorks
             _openStatus = false;
         }
 
-        public ISpreadable GetStuff(int quantity)
+        public ISpreadablePortion GetPortion(int quantity)
         {
             if (_openStatus == false)
                 Open();

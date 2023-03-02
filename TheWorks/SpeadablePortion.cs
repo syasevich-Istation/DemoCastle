@@ -4,7 +4,7 @@ using System.Text;
 
 namespace TheWorks
 {
-    public class SpeadablePortion : ISpreadable
+    public class SpeadablePortion : ISpreadablePortion
     {
         public string Name { get; private set; }
         public int Quantity { get; private set; }

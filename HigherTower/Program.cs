@@ -18,6 +18,6 @@ public class Program
 
         var service = container.Resolve<IChef>();
 
-        service?.DoWork();
+        service?.MakeSandwiches();
     }
 }

@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Xml.Schema;
-
+﻿
 namespace TheWorks
 {
     // describes a portion of spreadable stuff
-    public interface ISpreadable
+    public interface ISpreadablePortion
     {
         // smooth_peanatbutter, chunky_peantbutter, stroberry_jelly, salty_peanut_butter, etc
         public string Name { get; }

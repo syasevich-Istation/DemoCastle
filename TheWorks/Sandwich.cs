@@ -8,12 +8,12 @@ namespace TheWorks
     public class Sandwich
     {
         private BreadSlice? Foundation { get; set; } = null;
-        private List<ISpreadable> Toppings { get; set; }
+        private List<ISpreadablePortion> Toppings { get; set; }
         private BreadSlice? Cover { get; set; } = null;
 
         public Sandwich()
         {
-            Toppings= new List<ISpreadable>();
+            Toppings= new List<ISpreadablePortion>();
         }
 
         public Sandwich On(BreadSlice breadSlice)
@@ -28,7 +28,7 @@ namespace TheWorks
             return this;
         }
 
-        public Sandwich WithTopping(ISpreadable topping)
+        public Sandwich WithTopping(ISpreadablePortion topping)
         {
             // we can add as many topping as we want, but we cannot remove them
             // we cannot add toppings when the sandwich already covered by a slice of bread
@@ -49,7 +49,8 @@ namespace TheWorks
 
         public string GetDescription()
         {
-            return $"{string.Join(", ", Toppings.Select(t => t.Description))} on {Foundation.Description}";
+            var type = Cover == null ? "Open-faced" : "Traditional";
+            return $"{type}, {string.Join(", ", Toppings.Select(t => t.Description))} on {Foundation?.Description}";
         }
     }
 }

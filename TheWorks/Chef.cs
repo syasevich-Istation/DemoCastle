@@ -12,21 +12,29 @@ namespace TheWorks
             _productStore = productStore;
         }
 
-        public void DoWork()
+        public void MakeSandwiches()
         {
             var timer = new Stopwatch();
-            timer.Start();
 
+            _productStore.Open();
+
+            Console.WriteLine("Time to make sandwiches");
+
+            Console.WriteLine("Please wait...");
+            timer.Start();
             var sandwitch1 = MakeASandwich("white_bread", "chunky_peanut_butter", "strawberry_jelly");
             timer.Stop();
 
-            Console.WriteLine($"Made a sandwich in {timer.ElapsedMilliseconds} ms");
             Console.WriteLine($"Great sandwich: {sandwitch1.GetDescription()}");
+            Console.WriteLine($"Made it in {timer.ElapsedMilliseconds} ms");
 
+            Console.WriteLine("Please wait...");
             timer.Restart();
             var sandwitch2 = MakeASandwich("white_bread", "salty_peanut_butter", "strawberry_jelly");
-            Console.WriteLine($"Made a sandwich in {timer.ElapsedMilliseconds} ms");
-            Console.WriteLine($"Pretty tasty: {sandwitch1.GetDescription()}");
+            timer.Stop();
+
+            Console.WriteLine($"Pretty tasty: {sandwitch2.GetDescription()}");
+            Console.WriteLine($"Made it in {timer.ElapsedMilliseconds} ms");
 
             _productStore.Close();
 
@@ -40,8 +48,8 @@ namespace TheWorks
 
             return new Sandwich()
                 .On(breadLoaf.GetBreadSlice(2))
-                .WithTopping(peanatButterJur.GetStuff(2))
-                .WithTopping(jellyJar.GetStuff(2))
+                .WithTopping(peanatButterJur.GetPortion(2))
+                .WithTopping(jellyJar.GetPortion(2))
                 .CoverWith(breadLoaf.GetBreadSlice(2));
         }
     }

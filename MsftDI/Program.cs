@@ -19,7 +19,7 @@ public class Program
         var service = serviceProvider.GetService<IChef>();
 
 
-        service?.DoWork();
+        service?.MakeSandwiches();
 
         Console.Write("Press <Entr> to exist");
         Console.ReadLine();

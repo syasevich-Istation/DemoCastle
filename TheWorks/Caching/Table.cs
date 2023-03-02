@@ -11,6 +11,10 @@
             _pantry = pantry;
         }
 
+        public void Open()
+        {
+            _pantry.Open();
+        }
 
         public IJar GetAJur(string name)
         {

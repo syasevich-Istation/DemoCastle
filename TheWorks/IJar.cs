@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
+﻿
 namespace TheWorks
 {
     public interface IJar
@@ -9,6 +6,6 @@ namespace TheWorks
         string Name { get; }
         void Open();
         void Close();
-        ISpreadable GetStuff(int quantity);
+        ISpreadablePortion GetPortion(int quantity);
     }
 }
